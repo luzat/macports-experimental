@@ -1,0 +1,13 @@
+diff --git a/fuse-ext2/Makefile.am b/fuse-ext2/Makefile.am
+index f499f30..cd895ec 100644
+--- a/fuse-ext2/Makefile.am
++++ b/fuse-ext2/Makefile.am
+@@ -151,8 +151,6 @@ if DARWIN
+ install-exec-local:
+ 	$(INSTALL) -d "$(DESTDIR)/$(sbindir)"
+ 	$(LN_S) -f "/Library/Filesystems/fuse-ext2.fs/Contents/Resources/mount_fuse-ext2" "$(DESTDIR)/$(sbindir)/mount_fuse-ext2"
+-	$(LN_S) -f "/usr/local/opt/e2fsprogs/sbin/e2label" "$(DESTDIR)/$(sbindir)/e2label"
+-	$(LN_S) -f "/usr/local/opt/e2fsprogs/sbin/mke2fs" "$(DESTDIR)/$(sbindir)/mke2fs"
+ endif
+ if LINUX
+ install-data-hook:

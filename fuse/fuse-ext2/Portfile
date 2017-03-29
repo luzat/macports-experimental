@@ -1,0 +1,34 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+
+PortSystem          1.0
+
+name                fuse-ext2
+version             0.0.9-1.952bc7
+categories          fuse
+platforms           darwin
+maintainers         luzat.com:thomas
+description         Fuse-ext2 is a FUSE module to mount ext2, ext3 and ext4
+long_description    Fuse-ext2 is a multi OS FUSE module to mount ext2, ext3 and ext4 \
+                    file system devices and/or images with read write support.
+homepage            https://github.com/alperakcan/${name}
+fetch.type          git
+git.url             https://github.com/alperakcan/${name}.git
+git.branch          952bc7
+
+depends_build       port:autoconf \
+                    port:automake \
+                    port:libtool \
+                    port:e2fsprogs \
+                    port:osxfuse
+
+patchfiles          do-not-link-e2fsprogs.diff
+patch.pre_args      -p1
+
+post-patch {
+    reinplace "s|^PFX=.*$|PFX=${prefix}|" tools/macosx/fuse-ext2.fs/fuse-ext2.util
+}
+
+configure.cflags-append -I${prefix}/include/osxfuse
+configure.cmd           ./autogen.sh && ./configure
+
+destroot.violate_mtree  yes
