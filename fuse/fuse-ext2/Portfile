@@ -3,7 +3,7 @@
 PortSystem          1.0
 
 name                fuse-ext2
-version             0.0.9-1.952bc7
+version             0.0.9-2.952bc7
 categories          fuse
 platforms           darwin
 maintainers         luzat.com:thomas
@@ -21,7 +21,8 @@ depends_build       port:autoconf \
                     port:e2fsprogs \
                     port:osxfuse
 
-patchfiles          do-not-link-e2fsprogs.diff
+patchfiles          do-not-link-e2fsprogs.diff \
+                    fix-readdir.diff
 patch.pre_args      -p1
 
 post-patch {
